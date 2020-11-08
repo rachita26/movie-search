@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+<div class="main-container">
+  <div class="search-container">
+    <div class="row">
+      <div class="col-md-8 pd0">
+        <input
+          type="text"
+          [(ngModel)]="title"
+          class="form-control mrtb"
+          placeholder="Title"
+        />
+      </div>
+      <div class="col-md-2 pd0">
+        <select [(ngModel)]="type" class="form-control mrtb">
+          <option value="All">All</option>
+          <option value="movie">Movies</option>
+          <option value="series">Series</option>
+          <option value="episode">Episode</option>
+        </select>
+      </div>
+      <div class="col-md-2 pd0">
+        <button (click)="search()" class="btn btn-secondary mrtb">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-container card" *ngIf="showCard">
+    <div class="card-header">
+      {{ movieDetails.Title
+      }}<i
+        class="fa fa-heart-o favourite"
+        (click)="addFavourite()"
+        *ngIf="!favourite"
+      ></i>
+      <i
+        class="fa fa-heart favourite clred"
+        (click)="removeFavourite()"
+        *ngIf="favourite"
+      ></i>
+    </div>
+    <div class="card-body"><img src="{{ movieDetails.Poster }}" /></div>
+    <div class="card-footer">{{ movieDetails.Released }}</div>
+  </div>
+</div>
