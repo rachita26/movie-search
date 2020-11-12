@@ -1,10 +1,10 @@
 <app-navbar></app-navbar>
 
 <div class="fav-container">
-  <div class="card" *ngFor="let item of favouritesList; let index">
+  <div class="card" *ngFor="let item of favouritesList; let i = index">
     <div class="card-header">
       {{ item.Title
-      }}<i class="fa fa-heart favourite" (click)="removeFavourite(index)"></i>
+      }}<i class="fa fa-heart favourite" (click)="removeFavourite(i)"></i>
     </div>
     <div class="card-body"><img src="{{ item.Poster }}" /></div>
     <div class="card-footer">{{ item.Year }}</div>
