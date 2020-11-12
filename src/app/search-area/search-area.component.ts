@@ -10,31 +10,32 @@ export class SearchAreaComponent implements OnInit {
   constructor(private movieService: MovieService) {}
 
   title: any;
-  type: String = "All";
+  type: String = "movie";
   movieDetails: any;
   favouritesList = [];
   showCard: Boolean = false;
-  favourite: Boolean = false;
+  favourite;
 
   ngOnInit() {}
 
   search() {
     this.favourite = false;
     this.movieService
-      .getMovieDetails(this.title, this.type)
-      .subscribe((res) => {
+      .getDetailsByType(this.title, this.type)
+      .subscribe((res: any) => {
         if (res) {
-          this.movieDetails = res;
+          this.movieDetails = res.Search;
+          this.favourite = new Array(this.movieDetails.length).fill(false);
           this.showCard = true;
         }
       });
   }
 
-  addFavourite() {
+  addFavourite(index) {
     let tempFav: any = [];
     tempFav = JSON.parse(localStorage.getItem("favouritesList"));
-    this.favouritesList.push(this.movieDetails);
-    this.favourite = true;
+    this.favouritesList.push(this.movieDetails[index]);
+    this.favourite[index] = true;
     tempFav &&
       tempFav.forEach((element) => {
         this.favouritesList.push(element);
@@ -43,10 +44,13 @@ export class SearchAreaComponent implements OnInit {
     this.favouritesList = [];
   }
 
-  removeFavourite() {
+  removeFavourite(item, index) {
     this.favouritesList = JSON.parse(localStorage.getItem("favouritesList"));
-    this.favouritesList.splice(0, 1);
-    this.favourite = false;
+    let spliceIndex = this.favouritesList.findIndex(
+      (el) => el.imdbID == item.imdbID
+    );
+    this.favouritesList.splice(spliceIndex, 1);
+    this.favourite[index] = false;
     localStorage.setItem("favouritesList", JSON.stringify(this.favouritesList));
     this.favouritesList = [];
   }

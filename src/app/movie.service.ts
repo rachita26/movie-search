@@ -8,11 +8,9 @@ import { Observable, throwError } from "rxjs";
 export class MovieService {
   constructor(private http: HttpClient) {}
 
-  getMovieDetails(query, type?) {
-    if (type != "All")
-      return this.http.get(
-        `https://www.omdbapi.com/?t=${query}&apikey=d3a560c&type=${type}`
-      );
-    return this.http.get(`https://www.omdbapi.com/?t=${query}&apikey=d3a560c`);
+  getDetailsByType(query, type?) {
+    return this.http.get(
+      `https://www.omdbapi.com/?s=${query}&apikey=d3a560c&type=${type}`
+    );
   }
 }

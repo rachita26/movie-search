@@ -8,8 +8,8 @@
 }
 
 .result-container {
-  margin: auto;
-  width: 27%;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .pd0 {
@@ -30,5 +30,15 @@
 }
 img {
   height: 100%;
-  width: 100%;
+}
+
+.card {
+  margin: 15px;
+  flex-grow: 1;
+  width: 10rem;
+  height: 20rem;
+}
+
+.card-body {
+  text-align: center;
 }
