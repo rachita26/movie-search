@@ -31,17 +31,25 @@ export class SearchAreaComponent implements OnInit {
       });
   }
 
-  addFavourite(index) {
+  addFavourite(item, index) {
     let tempFav: any = [];
+    let checkIndex = -1;
     tempFav = JSON.parse(localStorage.getItem("favouritesList"));
-    this.favouritesList.push(this.movieDetails[index]);
-    this.favourite[index] = true;
-    tempFav &&
-      tempFav.forEach((element) => {
-        this.favouritesList.push(element);
-      });
-    localStorage.setItem("favouritesList", JSON.stringify(this.favouritesList));
-    this.favouritesList = [];
+    checkIndex = tempFav.findIndex((el) => el.imdbID == item.imdbID);
+    if (checkIndex > -1) alert("Already added to favourites");
+    else {
+      this.favouritesList.push(this.movieDetails[index]);
+      this.favourite[index] = true;
+      tempFav &&
+        tempFav.forEach((element) => {
+          this.favouritesList.push(element);
+        });
+      localStorage.setItem(
+        "favouritesList",
+        JSON.stringify(this.favouritesList)
+      );
+      this.favouritesList = [];
+    }
   }
 
   removeFavourite(item, index) {

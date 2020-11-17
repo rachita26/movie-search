@@ -31,7 +31,7 @@
         {{ item.Title
         }}<i
           class="fa fa-heart-o favourite"
-          (click)="addFavourite(i)"
+          (click)="addFavourite(item, i)"
           *ngIf="!favourite[i]"
         ></i>
         <i
